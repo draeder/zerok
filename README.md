@@ -1,0 +1,2 @@
+# zerok
+Zero knowledge proof
