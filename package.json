@@ -1,0 +1,35 @@
+{
+  "name": "zerok",
+  "version": "0.0.1",
+  "description": "Zero knowledge proof certification and validation for any datatype",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha 'test/test.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/draeder/zerok.git"
+  },
+  "keywords": [
+    "zero",
+    "knowledge",
+    "proof",
+    "cryptography"
+  ],
+  "author": "Daniel Raeder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/draeder/zerok/issues"
+  },
+  "homepage": "https://github.com/draeder/zerok#readme",
+  "dependencies": {
+    "big-integer": "^1.6.51",
+    "paillier-js": "^0.9.3"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0"
+  },
+  "directories": {
+    "test": "test"
+  }
+}
