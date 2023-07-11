@@ -9,25 +9,26 @@ Zerok was inspired by the Paillier Zero Knowledge Proof code from this [presenta
 
 ## Example
 ```js
-const Zerok = require('zerok')
+const Zerok = require('./index.js')
 
 const zerok = new Zerok(512)
 
 let message = Math.random() // message to verify
 let proof = zerok.proof(message)
 
-let isValid = zerok.verify(message, proof)
+let pubkey = zerok.keypair.publicKey
+let isValid = zerok.verify(message, proof, pubkey)
 console.log('Valid:', isValid) // true
 
 let corruptedMessage = message + 1
 
-let isNotValid = zerok.verify(corruptedMessage, proof)
+let isNotValid = zerok.verify(corruptedMessage, proof, pubkey)
 console.log('Valid:', isNotValid) // false
 
-zerok.newKey(32)
-isNotValid = zerok.verify(message, proof)
+keypair = zerok.newKey(32)
+pubkey = zerok.keypair.publicKey
+isNotValid = zerok.verify(message, proof, pubkey)
 console.log('Valid:', isNotValid) // false
-
 ```
 
 ## Install
@@ -53,12 +54,12 @@ Generates keypair used to certify the next message
 ##### `zerok.proof(message[number | string | object | array | buffer])`
 Returns a proof certificate object for the passed in message
 
-##### `zerok.verify(message[number | string | object | array | buffer], proof[object])`
-Verifies that the passed in message matches the original certified by the passed in proof certificate object
+##### `zerok.verify(message[number | string | object | array | buffer], proof[object]), pubkey[object]`
+Verifies that the passed in message matches the original certified by the passed in proof certificate object and pubkey object
 
 #### Properties
 ##### `zerok.keypair [object]`
 Returns the instance's current keypair
-> **⚠️ Warning** This is sensitive data and should never be shared!
+> **⚠️ Warning** The `privateKey` is sensitive data and should never be shared!
 
 This property is provided to allow developers more flexibility in how they use this library. Please take proper security precautions into consideration if using! It is the zerok instance password! If storing, it should be stored securely.

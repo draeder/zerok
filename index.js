@@ -114,8 +114,9 @@ module.exports = function(bits) {
     return encryptWithProof(publicKey, message, bits)
   }
   
-  this.verify = (message, certificate) => { 
+  this.verify = (message, certificate, pubkey) => { 
+    if(!pubkey) pubkey = publicKey
     message = stringToBigInt(message.toString())
-    return verifyMessage(publicKey, certificate.cipher, certificate.proof, message)
+    return verifyMessage(pubkey, certificate.cipher, certificate.proof, message)
   }
 }
