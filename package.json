@@ -1,6 +1,6 @@
 {
   "name": "zerok",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Zero knowledge proof certification and validation for any datatype",
   "main": "index.js",
   "scripts": {

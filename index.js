@@ -63,11 +63,20 @@ const encryptWithProof = (publicKey, message, bits=512) => {
 }
 
 const verifyMessage = (publicKey, cipher, proof, validMessage) => {
+  console.log(proof)
   const cipherBigInt = bigInt(cipher)
   
   const hash = crypto.createHash('sha256').update(proof.a).digest('hex')
 
-  const gmk = publicKey.g.modPow(validMessage, publicKey._n2)
+  let gmk
+  if (publicKey.g instanceof bigInt) {
+    // you can safely call modPow
+    gmk = publicKey.g.modPow(validMessage, publicKey._n2)
+  } else {
+      // convert to bigInt first
+      publicKey.g = bigInt(publicKey.g);
+  }
+  gmk = publicKey.g.modPow(validMessage, publicKey._n2)
   const uk = cipherBigInt.times(gmk.modInv(publicKey._n2)).mod(publicKey._n2)
 
   const ek = bigInt(proof.e)
