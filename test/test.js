@@ -11,7 +11,7 @@ describe('Create proof for a test message and validate it', () => {
     let isValid = zerok.verify(message, proof, pubkey)
     return isValid === true
   })
-  
+
   let corruptedMessage = message + 1
   describe('Check a bad message against proof', () => {
     it('Should return false', () => {
@@ -36,6 +36,34 @@ describe('Create proof for a test message and validate it', () => {
       pubkey = zerok.keypair.publicKey
       let isNotValid = zerok.verify(corruptedMessage, proof, pubkey)
       return isNotValid === false
+    })
+  })
+
+  describe('Check every data type works', () => {
+    it('Is a string', () => {
+      let proof = zerok.proof("string")
+      let isValid = zerok.verify("string", proof, pubkey)
+      return isValid
+    })
+    it('Is a number', () => {
+      let proof = zerok.proof(1)
+      let isValid = zerok.verify(1, proof, pubkey)
+      return isValid
+    })
+    it('Is an object', () => {
+      let proof = zerok.proof({obj: 'value'})
+      let isValid = zerok.verify({obj: 'value'}, proof, pubkey)
+      return isValid
+    })
+    it('Is an array', () => {
+      let proof = zerok.proof([1,2,3])
+      let isValid = zerok.verify([1,2,3], proof, pubkey)
+      return isValid
+    })
+    it('Is a buffer', () => {
+      let proof = zerok.proof(Buffer.from("string"))
+      let isValid = zerok.verify(Buffer.from("string"), proof, pubkey)
+      return isValid
     })
   })
 })
