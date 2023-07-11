@@ -63,7 +63,6 @@ const encryptWithProof = (publicKey, message, bits=512) => {
 }
 
 const verifyMessage = (publicKey, cipher, proof, validMessage) => {
-  console.log(proof)
   const cipherBigInt = bigInt(cipher)
   
   const hash = crypto.createHash('sha256').update(proof.a).digest('hex')
