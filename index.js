@@ -92,6 +92,25 @@ const verifyMessage = (publicKey, cipher, proof, validMessage) => {
   return zkn.eq(akue)
 }
 
+const verifySecret = (publicKey, cipher, proof) => {
+  const cipherBigInt = bigInt(cipher);
+
+  const hash = crypto.createHash('sha256').update(proof.a).digest('hex');
+  
+  const ek = bigInt(proof.e);
+  if (!bigInt(hash, 16).eq(ek)) {
+    return false;
+  }
+
+  const zk = bigInt(proof.z);
+  const ak = bigInt(proof.a);
+  const zkn = zk.modPow(publicKey.n, publicKey._n2);
+  const uke = cipherBigInt.modPow(ek, publicKey._n2); 
+  const akue = ak.times(uke).mod(publicKey._n2);
+  
+  return zkn.eq(akue);
+}
+
 function stringToBigInt(str) {
   const buf = Buffer.from(str)
   let hexString = buf.toString('hex')
@@ -126,5 +145,9 @@ module.exports = function(bits) {
     if(!pubkey) pubkey = publicKey
     message = stringToBigInt(message.toString())
     return verifyMessage(pubkey, certificate.cipher, certificate.proof, message)
+  }
+
+  this.verifySecret = (certificate, pubkey = publicKey) => { 
+    return verifySecret(pubkey, certificate.cipher, certificate.proof);
   }
 }

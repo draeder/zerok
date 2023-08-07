@@ -7,8 +7,13 @@ describe('Create proof for a test message and validate it', () => {
   let message = Math.random() // message to verify
   let proof = zerok.proof(message)
   
-  it('Should return true', () => {
+  it('Should return true for passed in message', () => {
     let isValid = zerok.verify(message, proof, pubkey)
+    return isValid === true
+  })
+
+  it('Should return true for certificate, no message', () => {
+    let isValid = zerok.verifySecret(proof, pubkey)
     return isValid === true
   })
 
