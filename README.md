@@ -30,8 +30,9 @@ pubkey = zerok.keypair.publicKey
 isNotValid = zerok.verify(message, proof, pubkey)
 console.log('Valid:', isNotValid) // false
 ```
-
 ## Install
+
+### Node
 ```js
 npm i zerok
 ```
@@ -39,6 +40,14 @@ npm i zerok
 #### Test
 ```js
 npm run test
+```
+
+#### Browser
+```html
+<script src="https://cdn.jsdelivr.net/gh/draeder/zerok@master/dist/zerok.dist.js">
+const zerok = new Zerok(512)
+// ...
+</script>
 ```
 
 ## Usage
