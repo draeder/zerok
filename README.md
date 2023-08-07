@@ -66,6 +66,9 @@ Returns a proof certificate object for the passed in message
 ##### `zerok.verify(message[number | string | object | array | buffer], proof[object]), pubkey[object]`
 Verifies that the passed in message matches the original certified by the passed in proof certificate object and pubkey object
 
+##### `zerok.verifySecret(proof[object]), pubkey[object]`
+Verifies that the passed in proof certificate is valid for the cipher it contains. This option is useful for verification without **any** knowledge of the original message.
+
 #### Properties
 ##### `zerok.keypair [object]`
 Returns the instance's current keypair
