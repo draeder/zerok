@@ -1,0 +1,35 @@
+# Debug and temporary files
+tmp.js
+test-bundle.js
+test-bundle.html
+
+# Development/build tools
+dist/
+.gitignore
+
+# Test files (keep them for users but exclude from main package)
+# Uncomment the next line if you want to exclude tests completely
+# test/
+
+# Bundle files (users can build their own or use the main file)
+zerok.bundle.js
+zerok.bundle.min.js
+
+# Development dependencies and logs
+npm-debug.log*
+yarn-debug.log*
+.npm
+.eslintcache
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Security documentation (keep for transparency)
+# SECURITY_FIXES.md

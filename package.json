@@ -1,10 +1,13 @@
 {
   "name": "zerok",
-  "version": "0.0.5",
-  "description": "Zero knowledge proof certification and validation for any datatype",
+  "version": "1.0.0",
+  "description": "Secure zero knowledge proof certification and validation for any datatype using Paillier cryptography",
   "main": "index.js",
   "scripts": {
-    "test": "mocha 'test/test.js'"
+    "test": "mocha 'test/test.js'",
+    "build": "browserify index.js --standalone ZeroK > zerok.bundle.js",
+    "build:min": "browserify index.js --standalone ZeroK | uglifyjs > zerok.bundle.min.js",
+    "prepublishOnly": "npm test"
   },
   "repository": {
     "type": "git",
@@ -14,10 +17,19 @@
     "zero",
     "knowledge",
     "proof",
-    "cryptography"
+    "cryptography",
+    "paillier",
+    "homomorphic",
+    "encryption",
+    "security",
+    "zero-knowledge",
+    "zkp"
   ],
   "author": "Daniel Raeder",
   "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "bugs": {
     "url": "https://github.com/draeder/zerok/issues"
   },
@@ -27,7 +39,9 @@
     "paillier-js": "^0.9.3"
   },
   "devDependencies": {
-    "mocha": "^10.2.0"
+    "browserify": "^17.0.1",
+    "mocha": "^10.2.0",
+    "uglify-js": "^3.19.3"
   },
   "directories": {
     "test": "test"
